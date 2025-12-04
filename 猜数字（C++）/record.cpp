@@ -237,6 +237,7 @@ bool rank_update(std::string rank_name)
     else
     {
         std::cout << "玩家信息文件无法打开" << std::endl;
+        QMessageBox::warning(nullptr, "错误", "玩家信息打开失败");
         return false;
     }
 }
@@ -257,17 +258,14 @@ void show_rules(std::stringstream& output)
 	else
     {
 		output << "无法打开规则文件，无法显示游戏规则。" << std::endl;
+        QMessageBox::warning(nullptr, "错误", "游戏规则文件打开失败");
 	}
 }
 
 //统一更新函数定义
 bool update_all(int update_EP)
 {
-    if (!record_save(is_win, difficulty, attempts, max_num, chance, EP))
-    {
-        QMessageBox::warning(nullptr, "错误", "游戏信息更新失败");
-        return false;
-    }
+    
     if (!player_update(update_EP, sum_EP))
     {
         QMessageBox::warning(nullptr, "错误", "玩家经验值更新失败");

@@ -46,6 +46,9 @@ std::string get_remote_version()
 		if (res != CURLE_OK)
 		{
 			ss<<"请求失败，请检查网络" << "错误码：" << '\n' << curl_easy_strerror(res) << std::endl;
+			int http_code;
+			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+			ss << "HTTP 状态码: " << http_code << std::endl;
 			respond = "";
 		}
 		else
